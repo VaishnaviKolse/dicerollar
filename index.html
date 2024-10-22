@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .dice-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .dice {
+            font-size: 80px;
+            padding: 20px;
+            border: 3px solid #333;
+            border-radius: 15px;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            transition: transform 0.5s ease;
+        }
+        .roll-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+        .roll-btn:hover {
+            background-color: #45a049;
+        }
+        .dice-rolling {
+            animation: rollDice 1s ease;
+        }
+        @keyframes rollDice {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(90deg); }
+            50% { transform: rotate(180deg); }
+            75% { transform: rotate(270deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dice-container">
+        <div id="dice" class="dice">🎲</div>
+        <button class="roll-btn" onclick="rollDice()">Roll the Dice!</button>
+    </div>
+
+    <script>
+        function rollDice() {
+            const dice = document.getElementById('dice');
+            dice.classList.add('dice-rolling');
+
+            // Roll dice after 1 second (after animation ends)
+            setTimeout(() => {
+                const randomNumber = Math.floor(Math.random() * 6) + 1;
+                dice.textContent = getDiceFace(randomNumber);
+                dice.classList.remove('dice-rolling');
+            }, 1000);
+        }
+
+        function getDiceFace(number) {
+            const diceFaces = {
+                1: '⚀',
+                2: '⚁',
+                3: '⚂',
+                4: '⚃',
+                5: '⚄',
+                6: '⚅'
+            };
+            return diceFaces[number];
+        }
+    </script>
+
+</body>
+</html>
